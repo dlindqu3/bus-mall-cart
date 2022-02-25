@@ -54,15 +54,26 @@ function addSelectedItemToCart() {
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
-  for(let i=0; i< cart.length; i++){
-    let currentItemQuantity = parseInt(document.getElementById('quantity'));
-    cartTotalItems += currentItemQuantity
+  for(let i=0; i< cart.items.length; i++){
+    let currentItemQuantity = cart.items[i].quantity; 
+    cartTotalItems += currentItemQuantity;
   }
+  console.log(cartTotalItems); 
   console.log(cart);
 }
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
+  let myList = document.createElement('ol'); 
+  for (let i = 0; i < cart.items.length; i++){
+    let currentItemQuantity = cart.items[i].quantity; 
+    let currentItemName = cart.items[i].product;
+    let currentListNum = document.createElement('li'); 
+    currentListNum.textContent = `product: ${currentItemName}, quantity: ${currentItemQuantity}`;
+    myList.appendChild(currentListNum); 
+  }
+  let listLocation = document.getElementById('cartContents');
+  listLocation.appendChild(myList); 
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
 }
